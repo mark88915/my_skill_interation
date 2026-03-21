@@ -324,7 +324,7 @@ Duration: 0.8s
     </div>
 
     <PageNav
-      :prev="{ path: '/ai/sdd/with-claude', label: '搭配 AI 實作' }"
+      :prev="{ path: '/ai/sdd/workflow', label: '開發流程與 AI 實作' }"
     />
   </div>
 </template>

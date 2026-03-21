@@ -67,17 +67,14 @@ const routes = [
 
   // AI — SDD
   { path: '/ai/sdd/intro', component: () => import('../views/ai/sdd/Intro.vue') },
-  { path: '/ai/sdd/principles', component: () => import('../views/ai/sdd/Principles.vue') },
   { path: '/ai/sdd/spec-writing', component: () => import('../views/ai/sdd/SpecWriting.vue') },
   { path: '/ai/sdd/workflow', component: () => import('../views/ai/sdd/Workflow.vue') },
-  { path: '/ai/sdd/with-claude', component: () => import('../views/ai/sdd/WithClaude.vue') },
   { path: '/ai/sdd/case-study', component: () => import('../views/ai/sdd/CaseStudy.vue') },
 
   // Infra — Docker
   { path: '/infra/docker/intro',      component: () => import('../views/infra/docker/Intro.vue') },
   { path: '/infra/docker/dockerfile', component: () => import('../views/infra/docker/DockerfileGuide.vue') },
   { path: '/infra/docker/compose',    component: () => import('../views/infra/docker/Compose.vue') },
-  { path: '/infra/docker/practice',   component: () => import('../views/infra/docker/Practice.vue') },
 
   // Infra — Kubernetes
   { path: '/infra/k8s/intro',     component: () => import('../views/infra/k8s/Intro.vue') },

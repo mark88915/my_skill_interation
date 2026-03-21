@@ -155,7 +155,7 @@ kubectl config use-context my-cluster     # 切換 Cluster
     </div>
 
     <PageNav
-      :prev="{ path: '/infra/docker/practice', label: 'Docker 實戰' }"
+      :prev="{ path: '/infra/docker/compose', label: 'Docker Compose 與實戰' }"
       :next="{ path: '/infra/k8s/concepts', label: '核心概念' }"
     />
   </div>

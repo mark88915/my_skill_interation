@@ -178,8 +178,8 @@ Received ──[退款完成]──> Completed
     </div>
 
     <PageNav
-      :prev="{ path: '/ai/sdd/principles', label: '核心原則' }"
-      :next="{ path: '/ai/sdd/workflow', label: '開發流程' }"
+      :prev="{ path: '/ai/sdd/intro', label: 'SDD 概述與核心原則' }"
+      :next="{ path: '/ai/sdd/workflow', label: '開發流程與 AI 實作' }"
     />
   </div>
 </template>

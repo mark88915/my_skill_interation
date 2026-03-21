@@ -1,6 +1,6 @@
 <script setup>
-import CodeBlock from '../../components/CodeBlock.vue'
-import PageNav from '../../components/PageNav.vue'
+import CodeBlock from '../../../components/CodeBlock.vue'
+import PageNav from '../../../components/PageNav.vue'
 </script>
 
 <template>

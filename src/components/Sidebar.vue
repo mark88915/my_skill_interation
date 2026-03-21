@@ -93,11 +93,9 @@ const emit = defineEmits(['navigate'])
 
       <div class="nav-section">
         <div class="nav-group-title">SDD 規格驅動開發</div>
-        <NavLink to="/ai/sdd/intro" :pageHeadings="pageHeadings" @navigate="emit('navigate')">SDD 概述</NavLink>
-        <NavLink to="/ai/sdd/principles" :pageHeadings="pageHeadings" @navigate="emit('navigate')">核心原則</NavLink>
+        <NavLink to="/ai/sdd/intro" :pageHeadings="pageHeadings" @navigate="emit('navigate')">SDD 概述與核心原則</NavLink>
         <NavLink to="/ai/sdd/spec-writing" :pageHeadings="pageHeadings" @navigate="emit('navigate')">規格撰寫</NavLink>
-        <NavLink to="/ai/sdd/workflow" :pageHeadings="pageHeadings" @navigate="emit('navigate')">開發流程</NavLink>
-        <NavLink to="/ai/sdd/with-claude" :pageHeadings="pageHeadings" @navigate="emit('navigate')">搭配 AI 實作</NavLink>
+        <NavLink to="/ai/sdd/workflow" :pageHeadings="pageHeadings" @navigate="emit('navigate')">開發流程與 AI 實作</NavLink>
         <NavLink to="/ai/sdd/case-study" :pageHeadings="pageHeadings" @navigate="emit('navigate')">實戰案例</NavLink>
       </div>
     </template>
@@ -108,8 +106,7 @@ const emit = defineEmits(['navigate'])
         <div class="nav-group-title">Docker</div>
         <NavLink to="/infra/docker/intro" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Docker 概述</NavLink>
         <NavLink to="/infra/docker/dockerfile" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Dockerfile 撰寫</NavLink>
-        <NavLink to="/infra/docker/compose" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Docker Compose</NavLink>
-        <NavLink to="/infra/docker/practice" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Docker 實戰</NavLink>
+        <NavLink to="/infra/docker/compose" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Docker Compose 與實戰</NavLink>
       </div>
 
       <div class="nav-section">

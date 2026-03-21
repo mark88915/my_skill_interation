@@ -76,8 +76,8 @@ volumes:
 
 <template>
   <div class="content-wrapper">
-    <h1>Docker Compose</h1>
-    <p class="page-subtitle">用單一 YAML 定義多容器應用，一鍵啟動完整開發環境</p>
+    <h1>Docker Compose 與實戰</h1>
+    <p class="page-subtitle">用單一 YAML 定義多容器應用，並完整容器化 ASP.NET Core Web API</p>
 
     <h2>什麼是 Docker Compose？</h2>
     <p>
@@ -192,9 +192,151 @@ docker compose up -d
 # 啟動包含 dev profile 的服務
 docker compose --profile dev up -d`" />
 
+    <!-- 實戰練習 -->
+    <h2>實戰：完整容器化 ASP.NET Core Web API</h2>
+    <div class="info-box info">
+      <div class="info-box-title">📌 本章實作內容</div>
+      <p>
+        將一個包含 DDD 分層架構的 ASP.NET Core Web API 完整容器化：<br>
+        ✅ 多階段 Dockerfile — 最終 Image &lt; 250 MB<br>
+        ✅ compose.yaml 一鍵啟動 API + SQL Server + Redis<br>
+        ✅ 透過環境變數注入連線字串，不硬編碼任何設定<br>
+        ✅ 加入 <code>/health</code> 端點，供 depends_on 健康檢查使用<br>
+        ✅ 容器啟動時自動執行 EF Core Migration
+      </p>
+    </div>
+
+    <h3>Step 1：加入健康檢查 NuGet 套件</h3>
+    <CodeBlock lang="bash" filename="安裝套件" :code="`
+dotnet add package Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore
+dotnet add package AspNetCore.HealthChecks.Redis
+dotnet add package AspNetCore.HealthChecks.SqlServer
+dotnet add package AspNetCore.HealthChecks.UI.Client`" />
+
+    <h3>Step 2：Program.cs 加入健康檢查與 Migration</h3>
+    <CodeBlock lang="csharp" filename="Program.cs" :code="`
+// 健康檢查
+builder.Services.AddHealthChecks()
+    .AddSqlServer(
+        builder.Configuration.GetConnectionString(&quot;Default&quot;)!,
+        name: &quot;sqlserver&quot;, tags: [&quot;db&quot;])
+    .AddRedis(
+        builder.Configuration.GetConnectionString(&quot;Redis&quot;)!,
+        name: &quot;redis&quot;, tags: [&quot;cache&quot;]);
+
+var app = builder.Build();
+
+// 健康檢查端點（供 Docker/K8s 使用）
+app.MapHealthChecks(&quot;/health&quot;, new HealthCheckOptions
+{
+    ResultStatusCodes =
+    {
+        [HealthStatus.Healthy]   = StatusCodes.Status200OK,
+        [HealthStatus.Degraded]  = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable
+    }
+});
+
+// 啟動時自動執行 Migration
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService&lt;AppDbContext&gt;();
+    var logger = scope.ServiceProvider.GetRequiredService&lt;ILogger&lt;Program&gt;&gt;();
+    try
+    {
+        logger.LogInformation(&quot;Applying EF Core migrations...&quot;);
+        await db.Database.MigrateAsync();
+        logger.LogInformation(&quot;Migrations applied successfully.&quot;);
+    }
+    catch (Exception ex)
+    {
+        logger.LogError(ex, &quot;Migration failed — container will exit&quot;);
+        throw;
+    }
+}
+
+app.Run();`" />
+
+    <h3>Step 3：環境變數驅動設定</h3>
+    <div class="info-box tip">
+      <div class="info-box-title">✅ ASP.NET Core 環境變數覆蓋規則</div>
+      <p>
+        冒號 <code>:</code> 用雙底線 <code>__</code> 取代即可覆蓋 appsettings.json 的任何設定：<br>
+        <code>ConnectionStrings__Default=Server=sqlserver;...</code><br>
+        → 覆蓋 <code>ConnectionStrings:Default</code>
+      </p>
+    </div>
+
+    <CodeBlock lang="json" filename="appsettings.json — 本地開發預設值" :code="`
+{
+  &quot;ConnectionStrings&quot;: {
+    &quot;Default&quot;: &quot;Server=localhost;Database=MyAppDb;User Id=sa;Password=dev_pass;TrustServerCertificate=True&quot;,
+    &quot;Redis&quot;: &quot;localhost:6379&quot;
+  }
+}`" />
+
+    <h3>Step 4：完整 Dockerfile</h3>
+    <CodeBlock lang="dockerfile" filename="Dockerfile" :code="`
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS restore
+WORKDIR /src
+COPY MyApp.sln .
+COPY src/MyApp.Api/MyApp.Api.csproj              src/MyApp.Api/
+COPY src/MyApp.Application/MyApp.Application.csproj  src/MyApp.Application/
+COPY src/MyApp.Domain/MyApp.Domain.csproj        src/MyApp.Domain/
+COPY src/MyApp.Infrastructure/MyApp.Infrastructure.csproj src/MyApp.Infrastructure/
+RUN dotnet restore
+
+FROM restore AS publish
+COPY . .
+RUN dotnet publish src/MyApp.Api/MyApp.Api.csproj -c Release -o /app/publish --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
+USER app
+WORKDIR /app
+COPY --from=publish --chown=app /app/publish .
+ENV ASPNETCORE_HTTP_PORTS=8080
+EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \\
+    CMD curl -f http://localhost:8080/health || exit 1
+ENTRYPOINT [&quot;dotnet&quot;, &quot;MyApp.Api.dll&quot;]`" />
+
+    <h3>Step 5：啟動與驗證</h3>
+    <CodeBlock lang="bash" filename="啟動與驗證指令" :code="`
+# 啟動（首次需 build）
+docker compose up -d --build
+
+# 查看所有服務狀態（含 healthy/unhealthy）
+docker compose ps
+
+# 追蹤 API 日誌（確認 Migration 成功）
+docker compose logs -f api
+
+# 測試健康檢查
+curl http://localhost:8080/health
+
+# 停止（保留資料）
+docker compose down
+
+# 完全清除（含 Volume 資料）
+docker compose down -v`" />
+
+    <h2>常見問題排查</h2>
+    <table>
+      <thead>
+        <tr><th>問題</th><th>原因</th><th>解法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>API 容器立即退出</td><td>應用程式崩潰或設定錯誤</td><td><code>docker compose logs api</code> 查看錯誤</td></tr>
+        <tr><td>Migration 失敗</td><td>SQL Server 尚未完全就緒</td><td>增加 start_period，確認密碼正確</td></tr>
+        <tr><td>健康檢查一直失敗</td><td>curl 未安裝或端點路徑錯誤</td><td>確認 <code>/health</code> 端點已正確註冊</td></tr>
+        <tr><td>Port 衝突</td><td>宿主機已佔用 1433/6379</td><td>修改 ports 宿主端，如 <code>11433:1433</code></td></tr>
+        <tr><td>Image 建構很慢</td><td>.dockerignore 未排除 bin/obj</td><td>確認包含 <code>**/bin/</code> 和 <code>**/obj/</code></td></tr>
+      </tbody>
+    </table>
+
     <PageNav
       :prev="{ path: '/infra/docker/dockerfile', label: 'Dockerfile 撰寫' }"
-      :next="{ path: '/infra/docker/practice', label: 'Docker 實戰' }"
+      :next="{ path: '/infra/k8s/intro', label: 'Kubernetes 概述' }"
     />
   </div>
 </template>
