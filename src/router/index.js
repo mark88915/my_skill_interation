@@ -20,6 +20,22 @@ const routes = [
   { path: '/csharp/cache/scenarios',    component: () => import('../views/csharp/cache/Scenarios.vue') },
   { path: '/csharp/cache/production',   component: () => import('../views/csharp/cache/Production.vue') },
 
+  // C# — 設計模式
+  { path: '/csharp/design-patterns/intro',           component: () => import('../views/csharp/design-patterns/Intro.vue') },
+  { path: '/csharp/design-patterns/strategy',        component: () => import('../views/csharp/design-patterns/Strategy.vue') },
+  { path: '/csharp/design-patterns/observer',        component: () => import('../views/csharp/design-patterns/Observer.vue') },
+  { path: '/csharp/design-patterns/decorator',       component: () => import('../views/csharp/design-patterns/Decorator.vue') },
+  { path: '/csharp/design-patterns/factory',         component: () => import('../views/csharp/design-patterns/Factory.vue') },
+  { path: '/csharp/design-patterns/singleton',       component: () => import('../views/csharp/design-patterns/Singleton.vue') },
+  { path: '/csharp/design-patterns/command',         component: () => import('../views/csharp/design-patterns/Command.vue') },
+  { path: '/csharp/design-patterns/adapter',         component: () => import('../views/csharp/design-patterns/Adapter.vue') },
+  { path: '/csharp/design-patterns/facade',          component: () => import('../views/csharp/design-patterns/Facade.vue') },
+  { path: '/csharp/design-patterns/template-method', component: () => import('../views/csharp/design-patterns/TemplateMethod.vue') },
+  { path: '/csharp/design-patterns/iterator',        component: () => import('../views/csharp/design-patterns/Iterator.vue') },
+  { path: '/csharp/design-patterns/composite',       component: () => import('../views/csharp/design-patterns/Composite.vue') },
+  { path: '/csharp/design-patterns/state',           component: () => import('../views/csharp/design-patterns/State.vue') },
+  { path: '/csharp/design-patterns/proxy',           component: () => import('../views/csharp/design-patterns/Proxy.vue') },
+
   // C# — EF Core 教學
   { path: '/csharp/efcore/intro', component: () => import('../views/efcore/Intro.vue') },
   { path: '/csharp/efcore/setup', component: () => import('../views/efcore/Setup.vue') },

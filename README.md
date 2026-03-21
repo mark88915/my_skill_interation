@@ -8,6 +8,7 @@
 - **DDD 領域驅動設計** — Bounded Context、Aggregate、Entity、Value Object、Domain Event
 - **EF Core 資料存取** — DbContext、Fluent API、Migration、CRUD、進階查詢與 DDD 整合
 - **Redis 與快取** — IMemoryCache、IDistributedCache、Redis、Cache-Aside、HybridCache
+- **設計模式 (Design Patterns)** — Intro、Factory、Singleton、Strategy、Observer、Decorator、Adapter、Facade、Command、Template Method、Iterator、State、Proxy、Composite
 
 ### AI 開發工具
 - **Claude Code** — Anthropic CLI 工具的安裝、基本操作、工作流程與進階用法
@@ -63,7 +64,8 @@ src/
 │   ├── Home.vue      # 首頁
 │   ├── ddd/          # DDD 教學頁面
 │   ├── efcore/       # EF Core 教學頁面
-│   ├── csharp/cache/ # 快取教學頁面
+│   ├── csharp/cache/            # 快取教學頁面
+│   │   └── design-patterns/    # 設計模式教學頁面
 │   ├── ai/           # AI 工具教學 (Claude Code, Dispatch, SDD, Features)
 │   ├── infra/        # Docker & K8s 教學頁面
 │   ├── cloud/        # 雲端服務教學頁面

@@ -34,6 +34,24 @@ const emit = defineEmits(['navigate'])
       </div>
 
       <div class="nav-section">
+        <div class="nav-group-title">設計模式</div>
+        <NavLink to="/csharp/design-patterns/intro" :pageHeadings="pageHeadings" @navigate="emit('navigate')">設計模式概述</NavLink>
+        <NavLink to="/csharp/design-patterns/strategy" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Strategy 策略模式</NavLink>
+        <NavLink to="/csharp/design-patterns/observer" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Observer 觀察者模式</NavLink>
+        <NavLink to="/csharp/design-patterns/decorator" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Decorator 裝飾者模式</NavLink>
+        <NavLink to="/csharp/design-patterns/factory" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Factory 工廠模式</NavLink>
+        <NavLink to="/csharp/design-patterns/singleton" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Singleton 單例模式</NavLink>
+        <NavLink to="/csharp/design-patterns/command" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Command 命令模式</NavLink>
+        <NavLink to="/csharp/design-patterns/adapter" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Adapter 轉接器模式</NavLink>
+        <NavLink to="/csharp/design-patterns/facade" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Facade 外觀模式</NavLink>
+        <NavLink to="/csharp/design-patterns/template-method" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Template Method 範本方法</NavLink>
+        <NavLink to="/csharp/design-patterns/iterator" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Iterator 迭代器模式</NavLink>
+        <NavLink to="/csharp/design-patterns/composite" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Composite 組合模式</NavLink>
+        <NavLink to="/csharp/design-patterns/state" :pageHeadings="pageHeadings" @navigate="emit('navigate')">State 狀態模式</NavLink>
+        <NavLink to="/csharp/design-patterns/proxy" :pageHeadings="pageHeadings" @navigate="emit('navigate')">Proxy 代理模式</NavLink>
+      </div>
+
+      <div class="nav-section">
         <div class="nav-group-title">EF Core 教學</div>
         <NavLink to="/csharp/efcore/intro" :pageHeadings="pageHeadings" @navigate="emit('navigate')">EF Core 概述</NavLink>
         <NavLink to="/csharp/efcore/setup" :pageHeadings="pageHeadings" @navigate="emit('navigate')">環境設定</NavLink>
