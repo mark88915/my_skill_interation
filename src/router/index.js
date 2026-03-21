@@ -4,12 +4,12 @@ const routes = [
   { path: '/', component: () => import('../views/Home.vue') },
 
   // C# — DDD 教學
-  { path: '/csharp/ddd/intro', component: () => import('../views/ddd/Intro.vue') },
-  { path: '/csharp/ddd/strategic', component: () => import('../views/ddd/Strategic.vue') },
-  { path: '/csharp/ddd/tactical', component: () => import('../views/ddd/Tactical.vue') },
-  { path: '/csharp/ddd/layers', component: () => import('../views/ddd/Layers.vue') },
-  { path: '/csharp/ddd/project', component: () => import('../views/ddd/Project.vue') },
-  { path: '/csharp/ddd/advanced', component: () => import('../views/ddd/Advanced.vue') },
+  { path: '/csharp/ddd/intro', component: () => import('../views/csharp/ddd/Intro.vue') },
+  { path: '/csharp/ddd/strategic', component: () => import('../views/csharp/ddd/Strategic.vue') },
+  { path: '/csharp/ddd/tactical', component: () => import('../views/csharp/ddd/Tactical.vue') },
+  { path: '/csharp/ddd/layers', component: () => import('../views/csharp/ddd/Layers.vue') },
+  { path: '/csharp/ddd/project', component: () => import('../views/csharp/ddd/Project.vue') },
+  { path: '/csharp/ddd/advanced', component: () => import('../views/csharp/ddd/Advanced.vue') },
 
   // C# — Redis 與快取
   { path: '/csharp/cache/intro',        component: () => import('../views/csharp/cache/Intro.vue') },
@@ -37,14 +37,14 @@ const routes = [
   { path: '/csharp/design-patterns/proxy',           component: () => import('../views/csharp/design-patterns/Proxy.vue') },
 
   // C# — EF Core 教學
-  { path: '/csharp/efcore/intro', component: () => import('../views/efcore/Intro.vue') },
-  { path: '/csharp/efcore/setup', component: () => import('../views/efcore/Setup.vue') },
-  { path: '/csharp/efcore/model', component: () => import('../views/efcore/Model.vue') },
-  { path: '/csharp/efcore/crud', component: () => import('../views/efcore/Crud.vue') },
-  { path: '/csharp/efcore/relations', component: () => import('../views/efcore/Relations.vue') },
-  { path: '/csharp/efcore/migration', component: () => import('../views/efcore/Migration.vue') },
-  { path: '/csharp/efcore/advanced', component: () => import('../views/efcore/AdvancedEf.vue') },
-  { path: '/csharp/efcore/ddd-integration', component: () => import('../views/efcore/DddIntegration.vue') },
+  { path: '/csharp/efcore/intro', component: () => import('../views/csharp/efcore/Intro.vue') },
+  { path: '/csharp/efcore/setup', component: () => import('../views/csharp/efcore/Setup.vue') },
+  { path: '/csharp/efcore/model', component: () => import('../views/csharp/efcore/Model.vue') },
+  { path: '/csharp/efcore/crud', component: () => import('../views/csharp/efcore/Crud.vue') },
+  { path: '/csharp/efcore/relations', component: () => import('../views/csharp/efcore/Relations.vue') },
+  { path: '/csharp/efcore/migration', component: () => import('../views/csharp/efcore/Migration.vue') },
+  { path: '/csharp/efcore/advanced', component: () => import('../views/csharp/efcore/AdvancedEf.vue') },
+  { path: '/csharp/efcore/ddd-integration', component: () => import('../views/csharp/efcore/DddIntegration.vue') },
 
   // AI — Claude Code
   { path: '/ai/claude-code/intro', component: () => import('../views/ai/claude-code/Intro.vue') },

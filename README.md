@@ -62,10 +62,11 @@ src/
 ├── components/       # 共用元件 (Sidebar, NavLink, CodeBlock, DarkModeToggle)
 ├── views/
 │   ├── Home.vue      # 首頁
-│   ├── ddd/          # DDD 教學頁面
-│   ├── efcore/       # EF Core 教學頁面
-│   ├── csharp/cache/            # 快取教學頁面
-│   │   └── design-patterns/    # 設計模式教學頁面
+│   ├── csharp/
+│   │   ├── ddd/              # DDD 教學頁面
+│   │   ├── efcore/           # EF Core 教學頁面
+│   │   ├── cache/            # 快取教學頁面
+│   │   └── design-patterns/  # 設計模式教學頁面
 │   ├── ai/           # AI 工具教學 (Claude Code, Dispatch, SDD, Features)
 │   ├── infra/        # Docker & K8s 教學頁面
 │   ├── cloud/        # 雲端服務教學頁面
