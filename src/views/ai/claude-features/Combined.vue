@@ -156,7 +156,7 @@ Domain/Orders/
     <h2>Step 3：Skills — 一鍵建立功能骨架</h2>
     <p>用 <code>/feature</code> Skill 自動建立所有骨架檔案，確保結構一致、不遺漏任何檔案。</p>
 
-    <CodeBlock lang="markdown" filename=".claude/commands/feature.md（回顧）" :code="`---
+    <CodeBlock lang="markdown" filename=".claude/skills/feature/SKILL.md（回顧）" :code="`---
 description: 建立新功能的完整骨架（後端 Command + 前端組件 + 測試）
 allowed-tools: Bash, Write, Read, Glob
 ---

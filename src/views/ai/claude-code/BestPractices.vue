@@ -104,8 +104,8 @@ import PageNav from '../../../components/PageNav.vue'
       </div>
       <div class="concept-card">
         <div class="icon">⚡</div>
-        <h4>善用自訂指令</h4>
-        <p>把常用的提示模板存為 slash command，減少重複輸入。</p>
+        <h4>善用 Skills</h4>
+        <p>把常用的工作流程存為 <code>.claude/skills/</code> 下的 SKILL.md，一鍵觸發標準化流程。</p>
       </div>
     </div>
 
