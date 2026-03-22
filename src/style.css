@@ -672,8 +672,33 @@ body {
   color: #1d4ed8;
 }
 
+/* ===== Table responsive wrapper ===== */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 16px 0 24px;
+}
+
+.table-container table {
+  margin: 0;
+}
+
 /* ===== Sidebar overlay ===== */
 .sidebar-overlay {
+  display: none;
+}
+
+/* ===== Mobile nav dropdown ===== */
+.mobile-nav-dropdown {
+  display: none;
+}
+
+.mobile-nav-overlay {
+  display: none;
+}
+
+/* ===== Sidebar toggle (inner pages, mobile only) ===== */
+.sidebar-toggle-btn {
   display: none;
 }
 
@@ -687,6 +712,55 @@ body {
     display: none;
   }
 
+  /* Mobile nav dropdown */
+  .mobile-nav-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--vt-c-bg);
+    border-bottom: 1px solid var(--vt-c-divider);
+    z-index: 400;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    pointer-events: none;
+    padding: 8px 0;
+  }
+
+  .mobile-nav-dropdown.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-dropdown a {
+    display: block;
+    padding: 12px 24px;
+    color: var(--vt-c-text-2);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .mobile-nav-dropdown a:hover,
+  .mobile-nav-dropdown a.router-link-active {
+    color: var(--vt-c-green);
+    background: var(--vt-c-brand-highlight);
+  }
+
+  .mobile-nav-overlay.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 350;
+  }
+
+  /* Sidebar (inner pages) */
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.25s ease;
@@ -705,12 +779,44 @@ body {
     z-index: 250;
   }
 
+  .sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--vt-c-green);
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  }
+
   .main-content {
     margin-left: 0;
   }
 
   .content-wrapper {
     padding: 32px 20px 64px;
+  }
+
+  /* Tables: force horizontal scroll on mobile */
+  .content-wrapper table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .content-wrapper th,
+  .content-wrapper td {
+    min-width: 100px;
   }
 
   .home-hero {

@@ -6,6 +6,7 @@ import DarkModeToggle from './components/DarkModeToggle.vue'
 
 const route = useRoute()
 const sidebarOpen = ref(false)
+const mobileNavOpen = ref(false)
 const pageHeadings = ref([])
 
 const isHome = computed(() => route.path === '/')
@@ -49,15 +50,28 @@ watch(() => route.path, async () => {
       <router-link to="/vue/advanced/index" :class="{ 'router-link-active': currentCategory === 'vue' }">Vue 生態</router-link>
     </nav>
     <DarkModeToggle />
-    <button class="mobile-menu-btn" @click="sidebarOpen = !sidebarOpen">
-      {{ sidebarOpen ? '✕' : '☰' }}
+    <button class="mobile-menu-btn" @click="mobileNavOpen = !mobileNavOpen">
+      {{ mobileNavOpen ? '✕' : '☰' }}
     </button>
   </header>
+
+  <!-- Mobile nav dropdown (homepage + inner pages) -->
+  <div class="mobile-nav-overlay" :class="{ open: mobileNavOpen }" @click="mobileNavOpen = false"></div>
+  <nav class="mobile-nav-dropdown" :class="{ open: mobileNavOpen }">
+    <router-link to="/csharp/ddd/intro" @click="mobileNavOpen = false">C#</router-link>
+    <router-link to="/ai/claude-code/intro" @click="mobileNavOpen = false">AI</router-link>
+    <router-link to="/infra/docker/intro" @click="mobileNavOpen = false">Docker & K8s</router-link>
+    <router-link to="/cloud/gcp/intro" @click="mobileNavOpen = false">上雲</router-link>
+    <router-link to="/vue/advanced/index" @click="mobileNavOpen = false">Vue 生態</router-link>
+  </nav>
 
   <div class="sidebar-overlay" :class="{ open: sidebarOpen }" @click="sidebarOpen = false"></div>
 
   <div class="app-body" v-if="!isHome">
     <Sidebar :category="currentCategory" :pageHeadings="pageHeadings" :class="{ open: sidebarOpen }" @navigate="sidebarOpen = false" />
+    <button class="sidebar-toggle-btn" @click="sidebarOpen = !sidebarOpen">
+      {{ sidebarOpen ? '✕' : '☰' }}
+    </button>
     <main class="main-content">
       <router-view />
     </main>
