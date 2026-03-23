@@ -574,7 +574,7 @@ body {
 /* ===== Home page ===== */
 .home-hero {
   text-align: center;
-  padding: 80px 32px 32px;
+  padding: 120px 32px 32px;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -840,7 +840,7 @@ body {
   }
 
   .home-hero {
-    padding: 48px 20px 24px;
+    padding: 88px 20px 24px;
   }
 
   .home-hero h1 {
