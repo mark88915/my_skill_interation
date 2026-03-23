@@ -704,8 +704,28 @@ body {
 
 /* ===== Mobile ===== */
 @media (max-width: 960px) {
+  .top-nav {
+    padding: 0 16px;
+    gap: 8px;
+  }
+
+  .nav-brand {
+    margin-right: auto;
+    font-size: 16px;
+    min-width: 0;
+  }
+
+  .dark-toggle {
+    margin-left: 0;
+  }
+
+  .dark-toggle-label {
+    display: none;
+  }
+
   .mobile-menu-btn {
     display: block;
+    flex-shrink: 0;
   }
 
   .nav-links {
