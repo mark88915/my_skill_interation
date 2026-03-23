@@ -710,17 +710,17 @@ body {
   }
 
   .nav-brand {
-    margin-right: auto;
+    flex: 1;
     font-size: 16px;
     min-width: 0;
   }
 
   .dark-toggle {
-    margin-left: 0;
+    margin-left: auto;
   }
 
-  .dark-toggle-label {
-    display: none;
+  .dark-toggle .dark-toggle-label {
+    display: none !important;
   }
 
   .mobile-menu-btn {
